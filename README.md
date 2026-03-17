@@ -4,7 +4,7 @@ TODO: Add more to the title of your project here
 
 TODO: Give a brief description of what your project is about
 
-This project...
+This project investigates anthocyanin content of bilberry drinks used in the randomised clinical controlled trial, BioDiAmi.
 
 # Brief description of folder and file contents
 
