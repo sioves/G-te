@@ -162,13 +162,15 @@ plot_degradation <- function(data, component_name) {
 # List of datasets and their component labels
 # -----------------------------
 datasets <- list(
-  bilpow_acn   = "Billberry Powder Anthocyanins",
-  bilpow_tp    = "Billberry Powder Total Phenols",
-  bil_acn      = "Billberry Drink Anthocyanins",
-  bil_tp       = "Billberry Drink Total Phenols",
-  oat_tp       = "Oat Drink Total Phenols",
-  biloat_acn   = "Billberry-Oat Drink Anthocyanins",
-  biloat_tp    = "Billberry-Oat Drink Total Phenols"
+  bilpow_acn   = "Billberry Powder Anthocyanins in mg/g",
+  bilpow_tp    = "Billberry Powder Total Phenols in mg/g",
+  bil_acn      = "Billberry Drink Anthocyanins in mg/g",
+  bil_tp       = "Billberry Drink Total Phenols in mg/g",
+  oat_tp       = "Oat Drink Total Phenols in mg/g",
+  biloat_acn   = "Billberry-Oat Drink Anthocyanins in mg/g",
+  biloat_tp    = "Billberry-Oat Drink Total Phenols in mg/g",
+  oat_ave_total = "Oat Drink Aventhramides in ug/g",
+  biloat_ave_total = "Billberry-Oat Drink Aventhramides in ug/g"
 )
 
 # -----------------------------
@@ -182,5 +184,5 @@ names(results) <- names(datasets)
 # -----------------------------
 # Example: show plots for biloat_tp
 # -----------------------------
-print(results$biloat_tp$plot_lnC)
-print(results$biloat_tp$plot_C)
+print(results$biloat_ave_total$plot_C)
+print(results$biloat_ave_total$plot_lnC)
