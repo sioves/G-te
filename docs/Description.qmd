@@ -9,6 +9,13 @@ library(tidyverse)
 ```
 
 ```{r}
-summary(anova_bilpow_acn)
+
+
+# Load færdigt results-objekt
+results <- readRDS("~/Desktop/Göte/R/results.rds")
+
+# Vis plots
+results$biloat_tp$plot_lnC
+results$biloat_tp$plot_C
 ```
 

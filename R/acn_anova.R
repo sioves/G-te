@@ -35,7 +35,7 @@ anova <- function(data, value_col, temp_col, time_col,
   # Return the fitted model object to allow generation of additional plots outside the function.
   return(model)
 }
-#Bilberry powder
+#ACN Bilberry powder
 anova_bilpow_acn <- anova(
   data = bilpow_acn,
   value_col = "Value",
@@ -43,7 +43,7 @@ anova_bilpow_acn <- anova(
   time_col = "Time"
 )
 
-#Bilberry drink
+#ACN Bilberry drink
 anova_bil_acn <- anova(
   data = bil_acn,
   value_col = "Value",
@@ -51,9 +51,33 @@ anova_bil_acn <- anova(
   time_col = "Time"
 )
 
-#Bilberry oat drink
+#ACN Bilberry oat drink
 biloat_acn <- anova(
   data = bil_acn,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#TP Bilberry powder
+anova_bilpow_tp <- anova(
+  data = bilpow_tp,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#TP Bilberry drink
+anova_bil_tp <- anova(
+  data = bil_tp,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#TP Bilberry oat drink
+biloat_tp <- anova(
+  data = bil_tp,
   value_col = "Value",
   temp_col = "Temperature",
   time_col = "Time"
