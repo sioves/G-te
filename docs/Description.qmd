@@ -1,0 +1,14 @@
+---
+title: "Descriptive document"
+author: "Your Name"
+format: html
+---
+
+```{r setup}
+library(tidyverse)
+```
+
+```{r}
+summary(anova_bilpow_acn)
+```
+
