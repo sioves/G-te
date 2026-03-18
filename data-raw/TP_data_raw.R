@@ -1,3 +1,5 @@
+#units: mg/g
+
 # Bilberry powder
 bilpow_tp <- data.frame(
   Temperature = c(
