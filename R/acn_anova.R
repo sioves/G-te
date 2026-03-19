@@ -76,9 +76,58 @@ anova_bil_tp <- anova(
 )
 
 #TP Bilberry oat drink
-biloat_tp <- anova(
-  data = bil_tp,
+anova_biloat_tp <- anova(
+  data = biloat_tp,
   value_col = "Value",
   temp_col = "Temperature",
   time_col = "Time"
 )
+
+#AVE a oat drink
+anova_oat_ave_a <- anova(
+  data = oat_ave_a,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#AVE b oat drink
+anova_oat_ave_b <- anova(
+  data = oat_ave_b,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#AVE c oat drink
+anova_oat_ave_c <- anova(
+  data = oat_ave_c,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#AVE a bilberry-oat drink
+anova_biloat_ave_a <- anova(
+  data = biloat_ave_a,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#AVE b bilberry-oat drink
+anova_biloat_ave_b <- anova(
+  data = biloat_ave_b,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+
+#AVE c bilberry-oat drink
+anova_biloat_ave_c <- anova(
+  data = biloat_ave_c,
+  value_col = "Value",
+  temp_col = "Temperature",
+  time_col = "Time"
+)
+¨
