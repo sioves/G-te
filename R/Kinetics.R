@@ -10,10 +10,14 @@ plot_degradation <- function(data, component_name) {
   data_clean <- data %>%
     mutate(
       time_weeks = case_when(
-        Time == "0"  ~ 0,
-        Time == "4W" ~ 4,
-        Time == "3M" ~ 12,
-        Time == "8M" ~ 32
+        Time == "0"   ~ 0,
+        Time == "4W"  ~ 4,
+        Time == "12W" ~ 12,
+        Time == "24W" ~ 24,
+        Time == "32W" ~ 32,
+        Time == "48W" ~ 48,
+        Time == "3M"  ~ 12,
+        Time == "8M"  ~ 32
       ),
       group = case_when(
         Temperature == "RT" ~ "RT",
@@ -22,10 +26,10 @@ plot_degradation <- function(data, component_name) {
       )
     )
 
-  # 2. Baseline
+  # 2. Baseline C0
   C0 <- data_clean %>%
     filter(time_weeks == 0) %>%
-    summarise(C0 = mean(Value)) %>%
+    summarise(C0 = mean(Value, na.rm = TRUE)) %>%
     pull(C0)
 
   # 3. Modeling dataset
@@ -46,7 +50,7 @@ plot_degradation <- function(data, component_name) {
   k_8C_pct <- k_8C * 100
 
   # 5. Prediction grid
-  t_seq <- seq(0, 32, length.out = 100)
+  t_seq <- seq(0, max(data_clean$time_weeks, na.rm = TRUE), length.out = 100)
   pred_ln <- expand.grid(
     time_weeks = t_seq,
     group = c("RT","8C")
@@ -93,13 +97,13 @@ plot_degradation <- function(data, component_name) {
                 alpha = 0.2, colour = NA) +
     scale_color_manual(values = c("RT"="#0072B2", "8C"="#D55E00")) +
     scale_fill_manual(values = c("RT"="#0072B2", "8C"="#D55E00")) +
-    annotate("text", x = 18, y = -0.20,
+    annotate("text", x = max(data_clean$time_weeks)/2, y = -0.2,
              label = paste0("k (RT) = ", round(k_RT_pct,2), " %/week"),
              color = "#0072B2", hjust = 0, size = 3) +
-    annotate("text", x = 18, y = -0.07,
+    annotate("text", x = max(data_clean$time_weeks)/2, y = -0.07,
              label = paste0("k (8°C) = ", round(k_8C_pct,2), " %/week"),
              color = "#D55E00", hjust = 0, size = 3) +
-    annotate("text", x = 10, y = -0.15,
+    annotate("text", x = max(data_clean$time_weeks)/3, y = -0.15,
              label = paste0("p = ", signif(p_val, 5)),
              size = 3) +
     labs(title = paste(component_name, ": First-order degradation kinetics"),
@@ -158,8 +162,9 @@ plot_degradation <- function(data, component_name) {
   )
 }
 
+
 # -----------------------------
-# List of datasets and their component labels
+# Datasets list
 # -----------------------------
 datasets <- list(
   bilpow_acn   = "Billberry Powder Anthocyanins in mg/g",
@@ -170,19 +175,41 @@ datasets <- list(
   biloat_acn   = "Billberry-Oat Drink Anthocyanins in mg/g",
   biloat_tp    = "Billberry-Oat Drink Total Phenols in mg/g",
   oat_ave_total = "Oat Drink Aventhramides in ug/g",
-  biloat_ave_total = "Billberry-Oat Drink Aventhramides in ug/g"
+  biloat_ave_total = "Billberry-Oat Drink Aventhramides in ug/g",
+  bil_b1_acn = "Billberry Drink B1 Anthocyanins in ug/g"
 )
 
 # -----------------------------
-# Apply function to all datasets
+# Apply function
 # -----------------------------
 results <- lapply(names(datasets), function(ds_name) {
   plot_degradation(get(ds_name), datasets[[ds_name]])
 })
 names(results) <- names(datasets)
 
+
+
 # -----------------------------
-# Example: show plots for biloat_tp
+# Show plots for all
 # -----------------------------
 print(results$biloat_ave_total$plot_C)
 print(results$biloat_ave_total$plot_lnC)
+print(results$oat_ave_total$plot_C)
+print(results$oat_ave_total$plot_lnC)
+print(results$biloat_acn$plot_C)
+print(results$biloat_acn$plot_lnC)
+print(results$biloat_tp$plot_C)
+print(results$biloat_tp$plot_lnC)
+print(results$bil_tp$plot_C)
+print(results$bil_tp$plot_lnC)
+print(results$bil_acn$plot_C)
+print(results$bil_acn$plot_lnC)
+print(results$bilpow_tp$plot_C)
+print(results$bilpow_tp$plot_lnC)
+print(results$bilpow_acn$plot_C)
+print(results$bilpow_acn$plot_lnC)
+print(results$oat_tp$plot_C)
+print(results$oat_tp$plot_lnC)
+
+print(results$bil_b1_acn$plot_C)
+print(results$bil_b1_acn$plot_lnC)
