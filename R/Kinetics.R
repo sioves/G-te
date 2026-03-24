@@ -176,40 +176,43 @@ datasets <- list(
   biloat_tp    = "Billberry-Oat Drink Total Phenols in mg/g",
   oat_ave_total = "Oat Drink Aventhramides in ug/g",
   biloat_ave_total = "Billberry-Oat Drink Aventhramides in ug/g",
-  bil_b1_acn = "Billberry Drink B1 Anthocyanins in ug/g"
+  bil_b1_acn = "Billberry Drink B1 Anthocyanins in ug/g",
+  bil_b2_acn = "Billberry Drink B2 Anthocyanins in ug/g",
+  bilpow_b1_acn = "Billberry Powder B1 Anthocyanins in ug/g",
+  bilpow_b2_acn = "Billberry Powder B2 Anthocyanins in ug/g",
+  biloat_b1_acn = "Billberry-Oat Drink B1 Anthocyanins in ug/g",
+  biloat_b2_acn = "Billberry-Oat Drink B2 Anthocyanins in ug/g",
+  bil_b1_tp = "Billberry Drink Total Phenols in mg/g",
+  bil_b2_tp = "Billberry Drink B2 Total Phenols in mg/g",
+  bilpow_b1_tp = "Billberry Powder B1 Total Phenols in mg/g",
+  bilpow_b2_tp = "Billberry Powder B2 Total Phenols in mg/g",
+  biloat_b1_tp = "Billberry-Oat Drink B1 Total Phenols in mg/g",
+  biloat_b2_tp = "Billberry-Oat Drink B2 Total Phenols in mg/g",
+  oat_b1_tp = "Oat Drink B1 Total Phenols in mg/g",
+  oat_b2_tp = "Oat Drink B2 Total Phenols in mg/g"
 )
 
 # -----------------------------
-# Apply function
+# Apply function to all datasets
 # -----------------------------
 results <- lapply(names(datasets), function(ds_name) {
   plot_degradation(get(ds_name), datasets[[ds_name]])
 })
 names(results) <- names(datasets)
 
+# -----------------------------
+# Print all plots automatically
+# -----------------------------
+for (res_name in names(results)) {
+  cat("\n--- Plots for dataset:", res_name, "---\n")
+  print(results[[res_name]]$plot_C)
+  print(results[[res_name]]$plot_lnC)
+}
 
 
 # -----------------------------
-# Show plots for all
+# Example on how to show plots induvidually
 # -----------------------------
 print(results$biloat_ave_total$plot_C)
 print(results$biloat_ave_total$plot_lnC)
-print(results$oat_ave_total$plot_C)
-print(results$oat_ave_total$plot_lnC)
-print(results$biloat_acn$plot_C)
-print(results$biloat_acn$plot_lnC)
-print(results$biloat_tp$plot_C)
-print(results$biloat_tp$plot_lnC)
-print(results$bil_tp$plot_C)
-print(results$bil_tp$plot_lnC)
-print(results$bil_acn$plot_C)
-print(results$bil_acn$plot_lnC)
-print(results$bilpow_tp$plot_C)
-print(results$bilpow_tp$plot_lnC)
-print(results$bilpow_acn$plot_C)
-print(results$bilpow_acn$plot_lnC)
-print(results$oat_tp$plot_C)
-print(results$oat_tp$plot_lnC)
 
-print(results$bil_b1_acn$plot_C)
-print(results$bil_b1_acn$plot_lnC)
