@@ -2,30 +2,43 @@
 
 library(dplyr)
 
-#Bilberry-Oat drink
-# Combines all data frames
-biloat_ave_all <- bind_rows(
-  biloat_ave_a,
-  biloat_ave_b,
-  biloat_ave_c
-)
+# Combines ave a, b and c and sums values
+sum_ave <- function(dfs) {
+  bind_rows(dfs) %>%
+    group_by(Temperature, Time, Replicate) %>%
+    summarise(Value = sum(Value), .groups = "drop")
+}
 
-# Sums up values for each unique combination of Temperature, Time og Replicate
-biloat_ave_total <- biloat_ave_all %>%
-  group_by(Temperature, Time, Replicate) %>%
-  summarise(Value = sum(Value), .groups = "drop")
+# =======================
+# Pilot
+# =======================
+# Oat drink Pilot
+oat_ave_all <- bind_rows(oat_ave_a, oat_ave_b, oat_ave_c)
+oat_ave_total <- sum_ave(list(oat_ave_a, oat_ave_b, oat_ave_c))
 
+# Bilberry-Oat drink Pilot
+biloat_ave_all <- bind_rows(biloat_ave_a, biloat_ave_b, biloat_ave_c)
+biloat_ave_total <- sum_ave(list(biloat_ave_a, biloat_ave_b, biloat_ave_c))
 
-#Oat drink
-# Combines all data frames
-oat_ave_all <- bind_rows(
-  oat_ave_a,
-  oat_ave_b,
-  oat_ave_c
-)
+# =======================
+# Batch 1
+# =======================
+# Oat drink Batch 1
+oat_b1_ave_all <- bind_rows(oat_b1_ave_a, oat_b1_ave_b, oat_b1_ave_c)
+oat_b1_ave_total <- sum_ave(list(oat_b1_ave_a, oat_b1_ave_b, oat_b1_ave_c))
 
-# Sums up values for each unique combination of Temperature, Time og Replicate
-oat_ave_total <- oat_ave_all %>%
-  group_by(Temperature, Time, Replicate) %>%
-  summarise(Value = sum(Value), .groups = "drop")
+# Bilberry-Oat drink Batch 1
+biloat_b1_ave_all <- bind_rows(biloat_b1_ave_a, biloat_b1_ave_b, biloat_b1_ave_c)
+biloat_b1_ave_total <- sum_ave(list(biloat_b1_ave_a, biloat_b1_ave_b, biloat_b1_ave_c))
+
+# =======================
+# Batch 2
+# =======================
+# Oat drink Batch 2
+oat_b2_ave_all <- bind_rows(oat_b2_ave_a, oat_b2_ave_b, oat_b2_ave_c)
+oat_b2_ave_total <- sum_ave(list(oat_b2_ave_a, oat_b2_ave_b, oat_b2_ave_c))
+
+# Bilberry-Oat drink Batch 2
+biloat_b2_ave_all <- bind_rows(biloat_b2_ave_a, biloat_b2_ave_b, biloat_b2_ave_c)
+biloat_b2_ave_total <- sum_ave(list(biloat_b2_ave_a, biloat_b2_ave_b, biloat_b2_ave_c))
 
