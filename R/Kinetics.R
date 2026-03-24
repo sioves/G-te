@@ -10,21 +10,25 @@ plot_degradation <- function(data, component_name) {
   data_clean <- data %>%
     mutate(
       time_weeks = case_when(
-        Time == "0"   ~ 0,
+        Time %in% c("0", "O") ~ 0,
         Time == "4W"  ~ 4,
         Time == "12W" ~ 12,
         Time == "24W" ~ 24,
         Time == "32W" ~ 32,
+        Time == "36W" ~ 36,
         Time == "48W" ~ 48,
+        Time == "51W" ~ 51,
         Time == "3M"  ~ 12,
-        Time == "8M"  ~ 32
+        Time == "8M"  ~ 32,
+        TRUE ~ NA_real_
       ),
       group = case_when(
         Temperature == "RT" ~ "RT",
         Temperature == "8C" ~ "8C",
         TRUE ~ NA_character_
       )
-    )
+    ) %>%
+    filter(!is.na(time_weeks), !is.na(Value))
 
   # 2. Baseline C0
   C0 <- data_clean %>%
@@ -167,29 +171,41 @@ plot_degradation <- function(data, component_name) {
 # Datasets list
 # -----------------------------
 datasets <- list(
-  bilpow_acn   = "Billberry Powder Anthocyanins in mg/g",
-  bilpow_tp    = "Billberry Powder Total Phenols in mg/g",
-  bil_acn      = "Billberry Drink Anthocyanins in mg/g",
-  bil_tp       = "Billberry Drink Total Phenols in mg/g",
-  oat_tp       = "Oat Drink Total Phenols in mg/g",
-  biloat_acn   = "Billberry-Oat Drink Anthocyanins in mg/g",
-  biloat_tp    = "Billberry-Oat Drink Total Phenols in mg/g",
-  oat_ave_total = "Oat Drink Aventhramides in ug/g",
-  biloat_ave_total = "Billberry-Oat Drink Aventhramides in ug/g",
-  bil_b1_acn = "Billberry Drink B1 Anthocyanins in ug/g",
-  bil_b2_acn = "Billberry Drink B2 Anthocyanins in ug/g",
-  bilpow_b1_acn = "Billberry Powder B1 Anthocyanins in ug/g",
-  bilpow_b2_acn = "Billberry Powder B2 Anthocyanins in ug/g",
-  biloat_b1_acn = "Billberry-Oat Drink B1 Anthocyanins in ug/g",
-  biloat_b2_acn = "Billberry-Oat Drink B2 Anthocyanins in ug/g",
-  bil_b1_tp = "Billberry Drink Total Phenols in mg/g",
-  bil_b2_tp = "Billberry Drink B2 Total Phenols in mg/g",
-  bilpow_b1_tp = "Billberry Powder B1 Total Phenols in mg/g",
-  bilpow_b2_tp = "Billberry Powder B2 Total Phenols in mg/g",
-  biloat_b1_tp = "Billberry-Oat Drink B1 Total Phenols in mg/g",
-  biloat_b2_tp = "Billberry-Oat Drink B2 Total Phenols in mg/g",
-  oat_b1_tp = "Oat Drink B1 Total Phenols in mg/g",
-  oat_b2_tp = "Oat Drink B2 Total Phenols in mg/g"
+  bilpow_tp    = "Bilberry Powder Total Phenols (mg/g)",
+  bil_tp       = "Bilberry Drink Total Phenols (mg/g)",
+  biloat_tp    = "Bilberry-Oat Drink Total Phenols (mg/g)",
+  oat_tp       = "Oat Drink Total Phenols (mg/g)",
+
+  bilpow_acn    = "Bilberry Powder Anthocyanins (mg/g)",
+  bil_acn       = "Bilberry Drink Anthocyanins (mg/g)",
+  biloat_acn    = "Bilberry-Oat Drink Anthocyanins (mg/g)",
+
+  oat_ave_total    = "Oat Drink Aventhramides (ug/g)",
+  biloat_ave_total    = "Bilberry-Oat Aventhramides (ug/g)",
+
+  bilpow_b1_tp = "Bilberry Powder B1 Total Phenols (mg/g)",
+  bil_b1_tp    = "Bilberry Drink B1 Total Phenols (mg/g)",
+  biloat_b1_tp = "Bilberry-Oat Drink B1 Total Phenols (mg/g)",
+  oat_b1_tp    = "Oat Drink B1 Total Phenols (mg/g)",
+
+  bilpow_b1_acn    = "Bilberry Powder B1 Anthocyanins (ug/g)",
+  bil_b1_acn       = "Bilberry Drink B1 Anthocyanins (ug/g)",
+  biloat_b1_acn    = "Bilberry-Oat Drink B1 Anthocyanins (ug/g)",
+
+  oat_b1_ave_total    = "Oat Drink B1 Aventhramides (ug/g)",
+  biloat_b1_ave_total    = "Bilberry-Oat B1 Aventhramides (ug/g)",
+
+  bilpow_b2_tp = "Bilberry Powder B2 Total Phenols (mg/g)",
+  bil_b2_tp    = "Bilberry Drink B2 Total Phenols (mg/g)",
+  biloat_b2_tp = "Bilberry-Oat Drink B2 Total Phenols (mg/g)",
+  oat_b2_tp    = "Oat Drink B2 Total Phenols (mg/g)",
+
+  bilpow_b2_acn    = "Bilberry Powder B2 Anthocyanins (ug/g)",
+  bil_b2_acn       = "Bilberry Drink B2 Anthocyanins (ug/g)",
+  biloat_b2_acn    = "Bilberry-Oat B2 Drink Anthocyanins (ug/g)",
+
+  oat_b2_ave_total    = "Oat Drink B2 Aventhramides (ug/g)",
+  biloat_b2_ave_total    = "Bilberry-Oat B2 Aventhramides (ug/g)"
 )
 
 # -----------------------------
