@@ -112,7 +112,7 @@ plot_degradation <- function(data, component_name) {
              size = 3) +
     labs(title = paste(component_name, ": First-order degradation kinetics"),
          x = "Time (weeks)",
-         y = "ln(C/C₀)",
+         y = expression(ln(C/C[0])),
          color = "Storage",
          fill = "Storage") +
     theme_classic(base_size = 12) +
