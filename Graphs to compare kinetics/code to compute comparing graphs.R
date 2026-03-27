@@ -83,32 +83,6 @@ dev.off()
 browseURL("biloat_acn_compare.pdf")
 
 
-#OAT DRINK ANTHOCYANINS
-pdf("oat_acn_compare.pdf", width = 10, height = 8)  # single PDF file
-
-# --- Page 1: Concentration vs Time ---
-oat_acn_pdf <-
-  results$oat_acn$plot_C +
-  results$oat_b1_acn$plot_C +
-  results$oat_b2_acn$plot_C +
-  plot_layout(ncol = 2)
-
-print(oat_acn_pdf)  # first page
-
-# --- Page 2: Kinetics ---
-oat_acn_k_pdf <-
-  results$oat_acn$plot_lnC +
-  results$oat_b1_acn$plot_lnC +
-  results$oat_b2_acn$plot_lnC +
-  plot_layout(ncol = 2)
-
-print(oat_acn_k_pdf)  # second page
-
-dev.off()
-
-browseURL("oat_acn_compare.pdf")
-
-
 
 #----------------------------------------------
 #TOTAL POLYPHENOLS
